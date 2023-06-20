@@ -1,0 +1,123 @@
+﻿@page "/counter"
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+
+<p role="status">Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+}
+@*@code {
+   SfPivotView<ProductDetails> Pivot;
+    public List<ToolbarItems> PivotToolbar = new List<ToolbarItems> {
+        ToolbarItems.New,
+        ToolbarItems.Save,
+        ToolbarItems.SaveAs,
+        ToolbarItems.Rename,
+        ToolbarItems.Remove,
+        
+        ToolbarItems.Grid,
+        ToolbarItems.Chart,
+        ToolbarItems.Export,
+        ToolbarItems.SubTotal,
+        ToolbarItems.GrandTotal,
+        ToolbarItems.Formatting,
+        ToolbarItems.FieldList
+    };
+    public List<ChartSeriesType> chartTypes = new List<ChartSeriesType> {
+        ChartSeriesType.Column,
+        ChartSeriesType.Bar,
+        ChartSeriesType.Line,
+        ChartSeriesType.Area,
+    };
+    
+    public string InitReport { get; set; }
+    public string[] Name { get; set; }
+    public List<string> Report = new List<string>();
+    public List<string> ReportName = new List<string>();
+    public void SaveReport(SaveReportArgs args)
+    {
+        int i = 0;
+        bool IsSaved = false;
+        for (i = 0; i < this.ReportName.Count; i++)
+        {}
+            if (this.ReportName[i] == args.ReportName)
+            {
+                this.Report[i] = args.Report;
+                IsSaved = true;
+            }
+        }
+        if (args.Report != null && !(IsSaved))
+        {
+            this.Report.Add(args.Report);
+            this.ReportName.Add(args.ReportName);
+        }
+    }
+    public void FetchReport(FetchReportArgs args)
+    {
+        args.ReportName = ReportName.ToArray();
+    }
+    public async Task LoadReport(LoadReportArgs args)
+    {
+        int i = 0;
+        int j = 0;
+        for (i = 0; i < ReportName.Count; i++)
+        {
+            if (ReportName[i] == args.ReportName)
+            {
+                j = i;
+            }
+        }
+        await this.Pivot.LoadPersistDataAsync(Report[j]);
+    }
+    public async Task RemoveReport(RemoveReportArgs args)
+    {
+        int i = 0;
+        for (i = 0; i < ReportName.Count; i++)
+        {
+            if (ReportName[i] == args.ReportName)
+            {
+                ReportName.RemoveAt(i);
+                Report.RemoveAt(i);
+                break;
+            }
+        }
+        if (Report.Count > 0)
+        {
+            await this.Pivot.LoadPersistDataAsync(Report[0]);
+        }
+    }
+    public void RenameReport(RenameReportArgs args)
+    {
+        if (args.IsReportExists)
+        {
+            int j = 0;
+            for (j = 0; j < ReportName.Count; j++)
+            {
+                if (ReportName[j] == args.Rename)
+                {
+                    ReportName.RemoveAt(j);
+                    Report.RemoveAt(j);
+                    break;
+                }
+            }
+        }
+        int i = 0;
+        for (i = 0; i <= (ReportName.Count - 1); i++)
+        {
+            if (ReportName[i] == args.ReportName)
+            {
+                ReportName[i] = args.Rename;
+            }
+        }
+    }
+    *@
